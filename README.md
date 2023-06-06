@@ -1,5 +1,37 @@
 # stac-fastapi-pgstac
 
+Fork of https://github.com/stac-utils/stac-fastapi-pgstac
+
+## Environment variables
+
+| Var name                           | Used for                                                      |
+| ---------------------------------- | ------------------------------------------------------------- |
+| APP_HOST                           | Host address for the application.                             |
+| APP_PORT                           | Port number for the application.                              |
+| RELOAD                             | Flag indicating whether the application should reload.        |
+| POSTGRES_USER                      | PostgreSQL username.                                         |
+| POSTGRES_PASS                      | PostgreSQL password.                                         |
+| POSTGRES_DBNAME                    | PostgreSQL database name.                                    |
+| POSTGRES_HOST_READER               | Hostname for reading from the PostgreSQL server.              |
+| POSTGRES_HOST_WRITER               | Hostname for writing to the PostgreSQL server.                |
+| POSTGRES_PORT                      | PostgreSQL port number.                                      |
+| DB_MIN_CONN_SIZE                   | Minimum number of database connections in the pool.           |
+| DB_MAX_CONN_SIZE                   | Maximum number of database connections in the pool.           |
+| WEB_CONCURRENCY                    | Number of worker processes for the application.               |
+| VSI_CACHE                          | Flag indicating whether VSI cache should be enabled.          |
+| GDAL_HTTP_MERGE_CONSECUTIVE_RANGES | Flag indicating whether GDAL should merge consecutive ranges. |
+| GDAL_DISABLE_READDIR_ON_OPEN       | Flag indicating whether GDAL should disable `readdir` on open. |
+
+
+## What changed in the fork
+- Self-initializing PgSTAC schema added
+- Custom Dockerfile
+- Custom new entrypoint script
+- Build actions for Docker image on ACR
+- Removed publishing to PyPI from GitHub Actions
+
+<hr>
+
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/stac-utils/stac-fastapi-pgstac/cicd.yaml?style=for-the-badge)](https://github.com/stac-utils/stac-fastapi-pgstac/actions/workflows/cicd.yaml)
 [![PyPI](https://img.shields.io/pypi/v/stac-fastapi.pgstac?style=for-the-badge)](https://pypi.org/project/stac-fastapi.pgstac)
 [![Documentation](https://img.shields.io/github/actions/workflow/status/stac-utils/stac-fastapi-pgstac/pages.yml?label=Docs&style=for-the-badge)](https://stac-utils.github.io/stac-fastapi-pgstac/)

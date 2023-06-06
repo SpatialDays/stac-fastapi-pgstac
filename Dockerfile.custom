@@ -1,0 +1,36 @@
+FROM python:3.8-slim as base
+
+# Any python libraries that require system libraries to be installed will likely
+# need the following packages in order to build
+RUN apt-get update && \
+    apt-get -y upgrade && \
+    apt-get install -y build-essential git && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+ENV CURL_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt
+
+FROM base as builder
+
+WORKDIR /app
+
+COPY . /app
+
+RUN pip install -e .[dev,server]
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get install -y wget
+RUN apt-get install -y postgresql-client
+COPY entrypoint.sh .
+# Make the script executable
+RUN chmod +x entrypoint.sh
+RUN pwd
+RUN ls
+# Download the schema file from the provided URL wget -O /tmp/pgstac.sql https://raw.githubusercontent.com/stac-utils/pgstac/main/src/pgstac/migrations/pgstac.0.7.1.sql
+
+# RUN wget -O /tmp/pgstac.sql https://raw.githubusercontent.com/stac-utils/pgstac/main/src/pgstac/migrations/pgstac.0.7.1.sql
+COPY pgstac.0.7.1.sql /tmp/pgstac.sql
+
+# Set the entrypoint for the container to the script
+ENTRYPOINT ["./entrypoint.sh"]
+CMD ["uvicorn", "stac_fastapi.pgstac.app:app", "--host", "0.0.0.0", "--port", "8082"]
