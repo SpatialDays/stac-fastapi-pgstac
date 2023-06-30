@@ -8,6 +8,7 @@ if [ -z "$POSTGRES_USER" ] || [ -z "$POSTGRES_PASS" ] || [ -z "$POSTGRES_DBNAME"
     exit 1
 fi
 
+sleep 10
 
 
 # Connect to the database and initialize it with the schema
