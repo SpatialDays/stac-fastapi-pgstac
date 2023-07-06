@@ -29,7 +29,7 @@ RUN ls
 # Download the schema file from the provided URL wget -O /tmp/pgstac.sql https://raw.githubusercontent.com/stac-utils/pgstac/main/src/pgstac/migrations/pgstac.0.7.1.sql
 
 # RUN wget -O /tmp/pgstac.sql https://raw.githubusercontent.com/stac-utils/pgstac/main/src/pgstac/migrations/pgstac.0.7.1.sql
-COPY pgstac.0.7.1.sql /tmp/pgstac.sql
+COPY pgstac.0.7.9.sql /tmp/pgstac.sql
 
 # Set the entrypoint for the container to the script
 ENTRYPOINT ["./entrypoint.sh"]
