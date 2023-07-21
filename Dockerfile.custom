@@ -24,13 +24,6 @@ RUN apt-get install -y postgresql-client
 COPY entrypoint.sh .
 # Make the script executable
 RUN chmod +x entrypoint.sh
-RUN pwd
-RUN ls
-# Download the schema file from the provided URL wget -O /tmp/pgstac.sql https://raw.githubusercontent.com/stac-utils/pgstac/main/src/pgstac/migrations/pgstac.0.7.1.sql
-
-# RUN wget -O /tmp/pgstac.sql https://raw.githubusercontent.com/stac-utils/pgstac/main/src/pgstac/migrations/pgstac.0.7.1.sql
 COPY pgstac.0.7.9.sql /tmp/pgstac.sql
-
-# Set the entrypoint for the container to the script
 ENTRYPOINT ["./entrypoint.sh"]
 CMD ["uvicorn", "stac_fastapi.pgstac.app:app", "--host", "0.0.0.0", "--port", "8082"]
