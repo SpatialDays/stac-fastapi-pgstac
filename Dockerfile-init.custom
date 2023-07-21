@@ -1,0 +1,11 @@
+FROM ubuntu:20.04
+
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get install -y wget
+RUN apt-get install -y postgresql-client
+COPY entrypoint.sh .
+# Make the script executable
+RUN chmod +x entrypoint.sh
+COPY pgstac.0.7.9.sql /tmp/pgstac.sql
+CMD ["./entrypoint.sh"]
