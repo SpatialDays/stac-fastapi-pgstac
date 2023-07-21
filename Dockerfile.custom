@@ -21,9 +21,4 @@ RUN apt-get update -y
 RUN apt-get upgrade -y
 RUN apt-get install -y wget
 RUN apt-get install -y postgresql-client
-COPY entrypoint.sh .
-# Make the script executable
-RUN chmod +x entrypoint.sh
-COPY pgstac.0.7.9.sql /tmp/pgstac.sql
-ENTRYPOINT ["./entrypoint.sh"]
 CMD ["uvicorn", "stac_fastapi.pgstac.app:app", "--host", "0.0.0.0", "--port", "8082"]
