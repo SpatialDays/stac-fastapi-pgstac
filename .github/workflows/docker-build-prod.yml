@@ -3,10 +3,10 @@ name: Build and push Docker image for production environment
 permissions:
   contents: read
 on:
+  workflow_dispatch:
   push:
     branches:
       - prod
-
 
 jobs:
   docker-build-push-prod:

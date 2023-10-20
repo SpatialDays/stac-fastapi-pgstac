@@ -153,7 +153,7 @@ def api_client(request, pg):
         search_get_request_model=create_get_request_model(extensions),
         search_post_request_model=post_request_model,
         response_class=ORJSONResponse,
-        router=APIRouter(prefix=prefix),
+        router=APIRouter(prefix=prefix, redirect_slashes=False),
     )
 
     return api
